@@ -1,0 +1,23 @@
+<attirbutes to extract from log files>
+    Application Name
+    Start date
+    User name
+    Hadoop queue
+    Job outcome (success or failure)
+    Duration
+    Maximum memory allocated
+    Container Hours for the job
+    Percent of cluster used by the job
+    Total Container Count
+    Max number of containers allocated
+    Number of containers killed
+    Details of job executed
+    Memory size for containers
+
+
+
+
+input: app_id
+output: 
+1. app_summary
+2. container_summary
