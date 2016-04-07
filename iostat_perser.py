@@ -16,6 +16,14 @@ import csv
 #fout6 = open("data6.txt",'w');
 #fout7 = open("data7.txt",'w');
 
+def extract_node_name(file_name):
+    #benchmarkname_node_appid_st_et
+    header = {}
+    header['benchmark'] = file_name.split('_')[0]
+    header['node'] = file_name.split('_')[1]
+    header['appid']    = file_name.split('_')[2]
+    return header
+
 
 def write_to_csv(csv_data,file_name):
     file_extension = ".csv"
@@ -31,7 +39,7 @@ def write_to_csv(csv_data,file_name):
         fp.write(header)
         for rows in csv_data:
             if rows.has_key('ts') and rows.has_key('read'):
-                line = rows['ts'] +","+ rows['user'] +","+ rows['system'] +","+ rows['iowait'] +","+ rows['read'] +"," + rows['write'] +","+ rows['await'] +","+ rows['svc'] +","+ rows['util'] + '\n'
+                line = rows['ts'] +","+ rows['user'] +","+ rows['system'] +","+ rows['iowait'] +","+ rows['read'] +"," + rows['write'] +","+ rows['await'] +","+ rows['svc'] +","+ rows['util'] +"," + rows['node'] +  '\n'
                 fp.write(line)
                 #fp.write('\n')
         #a = csv.writer(fp, delimiter=',')
@@ -43,9 +51,10 @@ def main(command_param):
     file_name=command_param[0]
     file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),file_name))
     output_file_name = file_name.split('.')[0]
-    
+    header = extract_node_name(file_name)
     print "input file: " + file_loc
     global_data = []
+    
     with open(file_loc,"r") as f:
         lines_after_48 = f.readlines()[2:]
         
@@ -74,6 +83,9 @@ def main(command_param):
                     ts=line.split()
                     #tm = datetime.strptime(line, "%m/%d/%Y %I:%M:%S %p")
                     data['ts'] = ts[1]
+                    data['node'] = header['node']
+                    data['benchmark'] = header['benchmark']
+                    data['appid'] = header['appid']
                     
                 #third line with cpu utilizaiton     
                 if i == 2:
@@ -129,10 +141,13 @@ def main(command_param):
 #fout5.close()
 #fout6.close()
 #fout7.close()
+
+#file name format
+# benchmarkname_node_appid_st_et
                 
 if __name__ == "__main__":
     if len(sys.argv)>1:
         main(sys.argv[1:])
     else:
-        print "<exec_name> <input_file_name>"
+        print "<exec_name> <input_file_name: wordcount2_object7_111> "
         
