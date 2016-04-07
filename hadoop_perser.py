@@ -14,8 +14,8 @@ data=OrderedDict()
 
 
 def print_data(data):
-    for keys in data.keys():
-        print data[keys]
+    for key,value in data.iteritems():
+        print (key, value)
 def get_attempt_id(line):
     at = line.split('appattempt_')[1].rstrip('\n')
     return at
@@ -29,7 +29,11 @@ def get_task_status(line):
     return line.split('RESULT=')[1].split('\t')[0]
     
 def export_to_csv(data,file_name):
-    pass    
+    with open(get_os_file_name(file_name),'w') as f:
+        for k, v in data.items():
+            for y in data
+            line = '{}, {},{},{},{}'.format(k,v[0],v[1])
+            f.write(line)
     
             
 def strip_time(line):
@@ -67,9 +71,9 @@ def main(file_name, app_id):
     parser_end_str="ApplicationSummary: appId=application_{}".format(app_id)
     #parser_job_accept="application_{} State change from SUBMITTED to ACCEPTED".format(app_id)
     #parser_container_start="RESULT=SUCCESS	APPID=application_{}	CONTAINERID".format(app_id)
-    parser_container_creation   = "resourcemanager.rmcontainer.RMContainerImpl: container_"
-    parser_container_launch     = "NodeId:"
-    
+    #parser_container_creation   = "resourcemanager.rmcontainer.RMContainerImpl: container_"
+    parser_container_creation = "Container Transitioned from NEW to ALLOCATED"
+    parser_container_launch     = "LeafQueue: assignedContainer"
     parser_app_attempt_start    = "ApplicationMasterService: Registering app attempt : appattempt"
     parser_container_run        = "Container Transitioned from ACQUIRED to RUNNING"
     parser_container_finish     = "Completed container: container_"
@@ -98,27 +102,30 @@ def main(file_name, app_id):
             
             #init the container details
             elif jobfound is True and parser_container_creation in line:
-                ct = strip_time(line)    #container creation time
+                ct = strip_time(line)    #container assign time
                 tid,tn = get_container_id(line) #container_id
                 st = 0  #start time
                 et = 0  #end time
                 nn = 0  #node_name
                 ts = 0  #task_status
+                #print tn,ct
                 data[tid,an]=[tn,ct,st,et,nn,ts]
                 
             elif jobfound is True and parser_container_launch in line:
-                print "launch_Stage"
+                #print "launch_Stage"
                 tid,tn = get_container_id(line)
                 #st = strip_time(line)
                 nn = get_node_name(line)
                 #print st+nn
                 #data[tid,an][2] = st
                 data[tid,an][4] = nn
+                
             elif jobfound is True and parser_container_run in line:
-                print "running"
                 tid,tn = get_container_id(line)
                 st = strip_time(line)
-                data[tid,an][2] = st    
+                data[tid,an][2] = st
+                print tn,st 
+                    
             elif jobfound is True and parser_container_finish in line:
                  tid,tn = get_container_id(line)
                  et = strip_time(line)
@@ -136,6 +143,7 @@ def main(file_name, app_id):
                 
                 #print line2
                 #print line3
+            
 
             #elif jobfound is True and  parser_cotainer_details in line:
             #    line2 = f.nextline()
