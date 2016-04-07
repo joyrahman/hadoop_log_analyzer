@@ -19,7 +19,8 @@ import csv
 
 def write_to_csv(csv_data,file_name):
     file_extension = ".csv"
-    output_file = file_name + file_extension
+    output_file = file_name.split('.')[0]+ file_extension
+    header = "time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,svc,util\n"
     output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
     print "output file: " + output_file_loc
 
@@ -27,6 +28,7 @@ def write_to_csv(csv_data,file_name):
         #header = "ts,user,system,iowait,read,write,await,svc,util"
         #fp.write(header)
         #fp.write("\n")
+        fp.write(header)
         for rows in csv_data:
             if rows.has_key('ts') and rows.has_key('read'):
                 line = rows['ts'] +","+ rows['user'] +","+ rows['system'] +","+ rows['iowait'] +","+ rows['read'] +"," + rows['write'] +","+ rows['await'] +","+ rows['svc'] +","+ rows['util'] + '\n'
@@ -71,7 +73,7 @@ def main(command_param):
                 if i == 0:
                     ts=line.split()
                     #tm = datetime.strptime(line, "%m/%d/%Y %I:%M:%S %p")
-                    data['ts'] = ts[0] +" " + ts[1]
+                    data['ts'] = ts[1]
                     
                 #third line with cpu utilizaiton     
                 if i == 2:

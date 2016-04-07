@@ -29,11 +29,18 @@ def get_task_status(line):
     return line.split('RESULT=')[1].split('\t')[0]
     
 def export_to_csv(data,file_name):
-    with open(get_os_file_name(file_name),'w') as f:
+    file_extension = ".csv"
+    output_file = file_name.split('.')[0]+ file_extension
+    header = "container_id,attempt_id,container_no,creation_time,start_time,end_time,node,status\n"
+    #output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
+    with open(get_os_file_name(output_file),'w') as f:
+        f.write(header)
         for k, v in data.items():
-            for y in data
-            line = '{}, {},{},{},{}'.format(k,v[0],v[1])
-            f.write(line)
+            line = "{},{},".format(k[0],k[1])
+            for item in v:
+                line += str(item) + ','
+            line = line[:-1] #remove trail comma    
+            f.write(line+'\n')
     
             
 def strip_time(line):
@@ -79,7 +86,7 @@ def main(file_name, app_id):
     parser_container_finish     = "Completed container: container_"
     #parser_container_status     = "RMAuditLogger: USER=cloudsys	OPERATION=AM Released Container	TARGET=SchedulerApp	RESULT"
 
-    print "searching for {}".format(parser_end_str)
+    #print "searching for {}".format(parser_end_str)
     with open(get_os_file_name(file_name),'r') as f:
         job_end_time = 0
         job_start_time = 0
@@ -124,7 +131,7 @@ def main(file_name, app_id):
                 tid,tn = get_container_id(line)
                 st = strip_time(line)
                 data[tid,an][2] = st
-                print tn,st 
+                #print tn,st 
                     
             elif jobfound is True and parser_container_finish in line:
                  tid,tn = get_container_id(line)
@@ -178,8 +185,8 @@ if __name__=="__main__":
     file_name = sys.argv[1]
     app_id = sys.argv[2]
     main(file_name, app_id)
-    print_data(data)
-    export_to_csv(data,"test.out")
+    #print_data(data)
+    export_to_csv(data,app_id)
 
 
 
