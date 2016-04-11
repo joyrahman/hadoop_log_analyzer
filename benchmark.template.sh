@@ -12,7 +12,7 @@ hadoop_executable="/home/cloudsys/hadoop/bin/hadoop"
 hadoop_log_dir="/home/cloudsys/hadoop_log"
 hadoop_log_name="${hadoop_benchmark}_${hadoop_file_size}_${job_id}"
 hadoop_app_id=""
-hadoop_example_jar="~/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar"
+hadoop_example_jar="/home/cloudsys/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar"
 hadoop_input_dir="swift://${hadoop_benchmark}_${hadoop_file_size}.SparkTest/"
 hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}_${hadoop_file_size}_${job_id}"
 
@@ -27,7 +27,7 @@ cd ~/hadoop
 
 
 echo "running hadoop..."
-echo "${hadoop_executable} jar ${example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name} 2>&1 &"
+echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name} 2>&1 &"
 ${hadoop_executable} jar ${example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name} 2>&1 &
 
 sleep 5
