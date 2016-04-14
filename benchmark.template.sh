@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #output_file_format=benchmarkname_node_appid_st_et
-#$1=> outputfile_suffix
-#$2=> input container
+#$1=> experiment_id or job_id
 
 #hadoop_param
 job_id=$1
@@ -14,7 +13,7 @@ hadoop_log_name="${hadoop_benchmark}_${hadoop_file_size}_${job_id}"
 hadoop_app_id=""
 hadoop_example_jar="/home/cloudsys/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar"
 hadoop_input_dir="swift://${hadoop_benchmark}${hadoop_file_size}.SparkTest/"
-hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}_${hadoop_file_size}_${job_id}"
+hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}${hadoop_file_size}${job_id}"
 
 #iostat_param
 iostat_duration=24
