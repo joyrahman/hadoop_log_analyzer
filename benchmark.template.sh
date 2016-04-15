@@ -26,9 +26,11 @@ iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 
 
 echo "running hadoop..."
-echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name} 2>&1 &"
-/home/cloudsys/hadoop/bin/hadoop jar $hadoop_example_jar $hadoop_benchmark $hadoop_input_dir $hadoop_output_dir > $hadoop_log_dir/$hadoop_log_name 2>&1 &
-
+#echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name}" 2>&1 &
+torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir}"
+out="${hadoop_log_dir}/${hadoop_log_name}"
+#/home/cloudsys/hadoop/bin/hadoop jar $hadoop_example_jar $hadoop_benchmark $hadoop_input_dir $hadoop_output_dir > $hadoop_log_dir/$hadoop_log_name 2>&1 &
+$torun >$out 2>&1 &
 sleep 5
 
 #iostat
