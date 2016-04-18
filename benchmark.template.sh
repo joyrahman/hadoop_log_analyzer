@@ -36,7 +36,7 @@ sleep 5
 
 #iostat
 echo "running iostat..."
-for j in {1..8}; do
+for j in 1 2 3 4 5 6 7 8; do
 	ssh object${j} 'iostat -c -d -x -t -m /dev/sda ${iostat_interval} ${iostat_duration}' > ${iostat_log_dir}/${iostat_log_name} &
 done
 
