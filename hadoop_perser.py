@@ -27,7 +27,8 @@ def get_node_name(line):
     return line.split('NodeId: ')[1].split(':')[0]
     
 def get_task_status(line):
-    return line.split('RESULT=')[1].split('\t')[0]
+    return "NA"
+    #return line.split('EVENT=')[1].split('\t')[0]
     
 def export_to_csv(data,file_name):
     file_extension = ".csv"
