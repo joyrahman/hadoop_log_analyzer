@@ -1,3 +1,5 @@
 for j in {1..8}; do
-	ssh object$j 'cat ~/hadoop/etc/hadoop/slaves  && cat /etc/hosts' >> report$j.txt
+	ssh object$j 'cat ~/hadoop/etc/hadoop/*-site.xml' >> report$j.txt
 done
+
+
