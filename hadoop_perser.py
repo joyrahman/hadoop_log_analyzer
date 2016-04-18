@@ -96,7 +96,9 @@ def main(file_name, app_id):
         job_end_time = 0
         job_start_time = 0
         an = 0
+
         for line in f:
+            print line
             if jobfound is True and parser_end_str in line:
                 job_end_time = strip_time(line)
                 print "endtime:{}".format(job_end_time)
