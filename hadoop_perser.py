@@ -184,10 +184,11 @@ def main(file_name, app_id):
 
 if __name__=="__main__":
     ## print  sys.argv
-    if len(sys.argv) < 3:
-        print "provide <file_name> <job_id>";
+    if len(sys.argv) < 4:
+        print "provide <yarn_rm_file_name> <log_file_name> <job_id>";
         sys.exit();
-    file_name = sys.argv[1]
+    file_name = sys.argv[2]
+    yarn_rm_file_name=sys.argv[1]
     app_id = sys.argv[2]
     main(file_name, app_id)
     #print_data(data)

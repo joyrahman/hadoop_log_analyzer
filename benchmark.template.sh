@@ -14,6 +14,8 @@ hadoop_app_id=""
 hadoop_example_jar="/home/cloudsys/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar"
 hadoop_input_dir="swift://${hadoop_benchmark}${hadoop_file_size}.SparkTest/"
 hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}${hadoop_file_size}${job_id}"
+hadoop_yarn_file_name="/home/cloudsys/hadoop/logs/yarn-cloudsys-resourcemanager-proxy.log"
+
 
 #iostat_param
 iostat_duration=24
@@ -54,6 +56,6 @@ sleep 120
 #get app_id from the file
 app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for job" | cut -f 5 -d":"  | cut -f 2 -d "_"`
 echo $app_id
-python hadoop_perser.py ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
+python hadoop_perser.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
 
 #consolidate_iostat_logs
