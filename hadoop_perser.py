@@ -108,10 +108,10 @@ def main(file_name, app_id):
 
                 break
             if parser_start_str in line:
-                print line
+                #print line
                 jobfound = True;
                 job_start_time = strip_time(line)
-                print "starttime:{}".fomat(job_start_time)
+                print "starttime:{}".format(job_start_time)
             
             elif jobfound is True and parser_app_attempt_start in line:
                 an = get_attempt_id(line)        
