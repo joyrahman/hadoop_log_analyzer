@@ -24,6 +24,7 @@ iostat_log_dir="/home/cloudsys/iostat_log"
 
 
 
+
 echo "running hadoop..."
 #echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name}" 2>&1 &
 torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir}"
@@ -43,6 +44,11 @@ done
 
 
 
+
+
 #consolidate_hadoop_logs
 #get app_id from the file
+app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for job" | cut -f 5 -d":"  | cut -f 2 -d "_"`
+python hadoop_perser.py ${hadoop_log_dir}/${hadoop_log_name}  $app_id
+
 #consolidate_iostat_logs
