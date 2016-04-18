@@ -31,13 +31,13 @@ torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hado
 out="${hadoop_log_dir}/${hadoop_log_name}"
 #/home/cloudsys/hadoop/bin/hadoop jar $hadoop_example_jar $hadoop_benchmark $hadoop_input_dir $hadoop_output_dir > $hadoop_log_dir/$hadoop_log_name 2>&1 &
 echo "${torun} >${out} 2>&1 &"
-$torun >$out 2>&1 &
+${torun} >${out} 2>&1 &
 sleep 5
 
 #iostat
 echo "running iostat..."
 for j in {1..8}; do
-	ssh object$j 'iostat -c -d -x -t -m /dev/sda ${iostat_interval} ${iostat_duration}' > ${iostat_log_dir}/${iostat_log_name} &
+	ssh object${j} 'iostat -c -d -x -t -m /dev/sda ${iostat_interval} ${iostat_duration}' > ${iostat_log_dir}/${iostat_log_name} &
 done
 
 
