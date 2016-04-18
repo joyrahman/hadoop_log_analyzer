@@ -43,7 +43,7 @@ for j in {1..8}; do
 done
 
 
-
+sleep 120
 
 
 #consolidate_hadoop_logs
