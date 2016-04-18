@@ -37,7 +37,7 @@ sleep 5
 #iostat
 echo "running iostat..."
 for j in {1..8}; do
-	ssh object${j} 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
+	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
 
