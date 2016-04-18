@@ -30,7 +30,9 @@ def get_task_status(line):
     
 def export_to_csv(data,file_name):
     file_extension = ".csv"
-    output_file = file_name.split('.')[0]+ file_extension
+    output_dir = file_name.split('/')[0:2]
+    print output_dir
+    output_file = file_name.split('/')[3]+ file_extension
     header = "container_id,attempt_id,container_no,creation_time,start_time,end_time,node,status\n"
     #output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
     with open(get_os_file_name(output_file),'w') as f:
