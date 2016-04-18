@@ -31,12 +31,10 @@ def get_task_status(line):
 def export_to_csv(data,file_name):
     file_extension = ".csv"
     output_dir, output_file = file_name.rsplit('/', 1)
-    print "list" + ''.join(x.strip() for x in output_dir)
     output_file = output_file + file_extension
-    print "output file" + output_file
     header = "container_id,attempt_id,container_no,creation_time,start_time,end_time,node,status\n"
-    #output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
-    with open(os.path.join(output_dir,output_file),'w') as f:
+    output_file_loc = os.path.normpath(os.path.join(output_dir,output_file))
+    with open(output_file_loc),'w') as f:
         f.write(header)
         for k, v in data.items():
             line = "{},{},".format(k[0],k[1])
@@ -183,7 +181,7 @@ def main(file_name, app_id):
 
 
 if __name__=="__main__":
-    print  sys.argv
+    ## print  sys.argv
     if len(sys.argv) < 3:
         print "provide <file_name> <job_id>";
         sys.exit();
