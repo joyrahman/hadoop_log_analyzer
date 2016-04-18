@@ -98,7 +98,7 @@ def main(file_name, app_id):
         an = 0
 
         for line in f:
-            print line
+            #print line
             if jobfound is True and parser_end_str in line:
                 job_end_time = strip_time(line)
                 print "endtime:{}".format(job_end_time)
@@ -107,9 +107,10 @@ def main(file_name, app_id):
 
                 break
             if parser_start_str in line:
+                print line
                 jobfound = True;
                 job_start_time = strip_time(line)
-                print "starttime:{}".format(job_start_time)
+                print "starttime:{}".fomat(job_start_time)
             
             elif jobfound is True and parser_app_attempt_start in line:
                 an = get_attempt_id(line)        
@@ -191,13 +192,15 @@ if __name__=="__main__":
         print "provide <yarn_rm_file_name> <log_file_name> <job_id>";
         sys.exit();
     file_name = sys.argv[2]
-    yarn_rm_file_name=sys.argv[1]
+    yarn_rm_file_name = sys.argv[1]
     app_id = sys.argv[2]
     main(yarn_rm_file_name, app_id)
     print_data(data)
 
-    export_to_csv(data,file_name)
+    export_to_csv(data, file_name)
 
+
+# python hadoop_perser.py /home/cloudsys/hadoop/logs/yarn-cloudsys-resourcemanager-proxy.log /home/cloudsys/hadoop_log/wordcount_4M_7899682 1460750106009
 
 
 #test
