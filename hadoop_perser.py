@@ -98,7 +98,7 @@ def main(file_name, app_id):
         an = 0
 
         for line in f:
-            #print line
+            #before end
             if jobfound is True and parser_end_str in line:
                 job_end_time = strip_time(line)
                 print "endtime:{}".format(job_end_time)
@@ -106,16 +106,18 @@ def main(file_name, app_id):
                 print total_duration
 
                 break
+            #1 at the beginning
             if parser_start_str in line:
                 #print line
                 jobfound = True;
                 job_start_time = strip_time(line)
                 print "starttime:{}".format(job_start_time)
-            
+
+            #2 get the app aptemp number
             elif jobfound is True and parser_app_attempt_start in line:
                 an = get_attempt_id(line)        
             
-            #init the container details
+            #3 init the container details
             elif jobfound is True and parser_container_creation in line:
                 ct = strip_time(line)    #container assign time
                 tid,tn = get_container_id(line) #container_id
@@ -133,12 +135,14 @@ def main(file_name, app_id):
                 nn = get_node_name(line)
                 #print st+nn
                 #data[tid,an][2] = st
-                data[tid,an][4] = nn
+                if (tid, an) in data.keys():
+                    data[tid,an][4] = nn
                 
             elif jobfound is True and parser_container_run in line:
                 tid,tn = get_container_id(line)
                 st = strip_time(line)
-                data[tid,an][2] = st
+                if (tid, an) in data.keys():
+                    data[tid,an][2] = st
                 #print tn,st 
                     
             elif jobfound is True and parser_container_finish in line:
@@ -147,8 +151,9 @@ def main(file_name, app_id):
                  line = f.next()
                  ts = get_task_status(line)
                  print tid, an
-                 data[tid,an][3] = et
-                 data[tid,an][5] = ts 
+                 if (tid,an) in data.keys():
+                    data[tid,an][3] = et
+                    data[tid,an][5] = ts
 
                 # move the filepoint two lines
                 #line2 = f.next()
