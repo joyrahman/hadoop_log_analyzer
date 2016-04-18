@@ -19,7 +19,6 @@ hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}${hadoop_file_siz
 iostat_duration=24
 iostat_interval=5
 iostat_log_dir="/home/cloudsys/iostat_log"
-iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 
 
 
@@ -37,6 +36,8 @@ sleep 5
 #iostat
 echo "running iostat..."
 for j in {1..8}; do
+	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
+	echo ${iostat_log_name}
 	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
