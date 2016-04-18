@@ -30,13 +30,13 @@ def get_task_status(line):
     
 def export_to_csv(data,file_name):
     file_extension = ".csv"
-    output_dir = file_name.split('/')
+    output_dir, output_file = file_name.rsplit('/', 1)
     print "list" + ''.join(x.strip() for x in output_dir)
-    output_file = file_name.split('/')[-1]+ file_extension
+    output_file = output_file + file_extension
     print "output file" + output_file
     header = "container_id,attempt_id,container_no,creation_time,start_time,end_time,node,status\n"
     #output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
-    with open(get_os_file_name(output_file),'w') as f:
+    with open(os.path.join(output_dir,output_file),'w') as f:
         f.write(header)
         for k, v in data.items():
             line = "{},{},".format(k[0],k[1])
@@ -57,8 +57,9 @@ def get_container_id(line):
 
 
 def get_os_file_name(file_name):
-    file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),file_name))
-    return file_loc
+    #file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),file_name))
+
+    return file_name
 
 
 def convert_time(e,s):
@@ -190,7 +191,7 @@ if __name__=="__main__":
     app_id = sys.argv[2]
     main(file_name, app_id)
     #print_data(data)
-    export_to_csv(data,app_id)
+    export_to_csv(data,file_name)
 
 
 
