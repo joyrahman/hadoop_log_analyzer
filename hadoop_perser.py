@@ -80,7 +80,6 @@ def main(file_name, app_id):
     # output to json file
     jobfound = False
     parser_start_str="Storing application with id application_{}".format(app_id)
-    print parser_start_str
     parser_end_str="ApplicationSummary: appId=application_{}".format(app_id)
     #parser_job_accept="application_{} State change from SUBMITTED to ACCEPTED".format(app_id)
     #parser_container_start="RESULT=SUCCESS	APPID=application_{}	CONTAINERID".format(app_id)
@@ -103,7 +102,7 @@ def main(file_name, app_id):
             if jobfound is True and parser_end_str in line:
                 job_end_time = strip_time(line)
                 print "endtime:{}".format(job_end_time)
-                total_duration = convert_time(job_end_time,job_start_time)
+                total_duration = convert_time(job_end_time, job_start_time)
                 print total_duration
 
                 break
@@ -147,6 +146,7 @@ def main(file_name, app_id):
                  et = strip_time(line)
                  line = f.next()
                  ts = get_task_status(line)
+                 print tid, an
                  data[tid,an][3] = et
                  data[tid,an][5] = ts 
 
