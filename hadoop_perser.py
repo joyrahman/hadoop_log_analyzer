@@ -191,7 +191,8 @@ if __name__=="__main__":
     yarn_rm_file_name=sys.argv[1]
     app_id = sys.argv[2]
     main(file_name, app_id)
-    #print_data(data)
+    print_data(data)
+
     export_to_csv(data,file_name)
 
 
