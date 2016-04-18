@@ -14,6 +14,7 @@ data=OrderedDict()
 
 
 def print_data(data):
+    print "[printing data]"
     for key,value in data.iteritems():
         print (key, value)
 def get_attempt_id(line):
