@@ -80,6 +80,7 @@ def main(file_name, app_id):
     # output to json file
     jobfound = False
     parser_start_str="Storing application with id application_{}".format(app_id)
+    print parser_start_str
     parser_end_str="ApplicationSummary: appId=application_{}".format(app_id)
     #parser_job_accept="application_{} State change from SUBMITTED to ACCEPTED".format(app_id)
     #parser_container_start="RESULT=SUCCESS	APPID=application_{}	CONTAINERID".format(app_id)
@@ -98,7 +99,7 @@ def main(file_name, app_id):
         an = 0
 
         for line in f:
-            print line
+            #print line
             if jobfound is True and parser_end_str in line:
                 job_end_time = strip_time(line)
                 print "endtime:{}".format(job_end_time)
