@@ -34,8 +34,8 @@ def export_to_csv(data,file_name):
     output_file = output_file + file_extension
     header = "container_id,attempt_id,container_no,creation_time,start_time,end_time,node,status\n"
     output_file_loc = os.path.normpath(os.path.join(output_dir,output_file))
-    print "----[python module for hadoop task informaiton]----"
-    print "hadoop_output_file:{}".format(output_file_loc)
+    print "----[python hadoop module]----"
+    print "output_file: {}".format(output_file_loc)
     with open(output_file_loc,'w') as f:
         f.write(header)
         for k, v in data.items():

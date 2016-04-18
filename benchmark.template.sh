@@ -25,11 +25,15 @@ iostat_log_dir="/home/cloudsys/iostat_log"
 
 
 echo "----[running benchmark]----"
+echo "benchmark: $hadoop_benchmark"
+echo "input_dir: $hadoop_input_dir"
+echo "output_dir: $hadoop_output_dir"
+echo "log: $hadoop_log_name"
 #echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name}" 2>&1 &
 torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir}"
 out="${hadoop_log_dir}/${hadoop_log_name}"
 #/home/cloudsys/hadoop/bin/hadoop jar $hadoop_example_jar $hadoop_benchmark $hadoop_input_dir $hadoop_output_dir > $hadoop_log_dir/$hadoop_log_name 2>&1 &
-echo "${torun} >${out} 2>&1 &"
+#echo "${torun} >${out} 2>&1 &"
 ${torun} >${out} 2>&1 &
 sleep 5
 
