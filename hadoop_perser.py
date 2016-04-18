@@ -181,6 +181,7 @@ def main(file_name, app_id):
 if __name__=="__main__":
     if len(sys.argv) < 3:
         print "provide <file_name> <job_id>";
+        print  sys.argv
         sys.exit();
     file_name = sys.argv[1]
     app_id = sys.argv[2]
