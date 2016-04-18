@@ -24,8 +24,7 @@ iostat_log_dir="/home/cloudsys/iostat_log"
 
 
 
-
-echo "running hadoop..."
+echo "----[running benchmark]----"
 #echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name}" 2>&1 &
 torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir}"
 out="${hadoop_log_dir}/${hadoop_log_name}"
@@ -35,14 +34,15 @@ ${torun} >${out} 2>&1 &
 sleep 5
 
 #iostat
-echo "running iostat..."
+
+echo "----[running iostat]----"
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
-	echo ${iostat_log_name}
+	echo "[iostat log]: ${iostat_log_name}"
 	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
-
+echo "----[sleeping for 120 sec]----"
 sleep 120
 
 
