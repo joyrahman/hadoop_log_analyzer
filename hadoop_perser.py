@@ -188,7 +188,7 @@ def main(file_name, app_id):
 
 
 if __name__=="__main__":
-    ## print  sys.argv
+    print  sys.argv
     if len(sys.argv) < 3:
         print "provide <yarn_rm_file_name> <log_file_name> <job_id>";
         sys.exit();
