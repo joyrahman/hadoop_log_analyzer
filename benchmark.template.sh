@@ -61,7 +61,7 @@ python hadoop_perser.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_
 #consolidate_iostaat_logs
 echo "----[python iostat]----"
 
-mkdir -p  ${output_dir}/{job_id}
+mkdir -p  ${output_dir}/${job_id}
 mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}/${job_id}/
 
 for j in {1..8}; do
