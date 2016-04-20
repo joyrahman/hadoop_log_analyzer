@@ -120,7 +120,7 @@ def main(file_name, app_id):
 
                     
             elif parser_container_finish in line and app_id in line:
-                 container_id, __ = get_container_id(line)
+                 container_id = get_container_id(line)[0]
                  end_time = strip_time(line)
                  container_status = get_task_status(line)
                  if container_id in data.keys():
