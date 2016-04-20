@@ -41,7 +41,7 @@ def write_to_csv(csv_data,file_name):
         fp.write(header)
         for rows in csv_data:
             if rows.has_key('ts') and rows.has_key('read'):
-                line = rows['ts'] +","+ rows['user'] +","+ rows['system'] +","+ rows['iowait'] +","+ rows['read'] +"," + rows['write'] +","+ rows['await'] +","+ rows['svc'] +","+ rows['util'] +"," + rows['node'] +  '\n'
+                line = rows['ts'] +","+ rows['user'] +","+ rows['system'] +","+ rows['iowait'] +","+ rows['read'] +"," + rows['write'] +","+ rows['await'] +","+ rows['util'] +"," + rows['node'] +  '\n'
                 fp.write(line)
                 #fp.write('\n')
         #a = csv.writer(fp, delimiter=',')
@@ -94,9 +94,11 @@ def main(command_param):
                 #third line with cpu utilizaiton     
                 if i == 2:
                     #print str(i) + ">" +line
-                    user=line.split( )[1]
-                    system=line.split( )[3]
-                    iowait=line.split( )[4]
+                    user=line.split( )[0]
+                    system=line.split( )[2]
+                    iowait=line.split( )[3]
+                    steal =line.split( )[4]
+                    idle = line.split( )[5]
                     #if node=="2" and user!='' and system!='' and iowait!='':
                     #    fout2.write(str(user)+","+str(system)+","+str(iowait)+",")
                     #elif node=="3" and user!='' and system!='' and iowait!='':
@@ -113,13 +115,16 @@ def main(command_param):
                     data['system'] = system
                     data['iowait'] = iowait
                 if i == 5:
+                    #['Device:', 'rrqm/s', 'wrqm/s', 'r/s',  'w/s', 'rMB/s', 'wMB/s', 'avgrq-sz', 'avgqu-sz', 'await', 'r_await', 'w_await', 'svctm', '%util']
+                    #['sda',      '0.00' ,  '4.40' , '0.00', '1.20', '0.00', '0.03' , '52.00'   , '0.00'     , '0.67', '0.00'   , '0.67'   , '0.67' , '0.08']
+
                     #pass
                     #print line
                     #print str(i) + ">" +line
-                    data['read']=line.split( )[3]
-                    data['write']=line.split( )[4]
+                    data['read']=line.split( )[5]
+                    data['write']=line.split( )[6]
                     data['await']=line.split( )[9]
-                    data['svc']=line.split( )[12]
+                    #data['svc']=line.split( )[12]
                     data['util']=line.split( )[13]
                     #if node=="2" and read!='' and write!='' and await!='' and svc!='' and util!='':
                     #    fout2.write(str(read)+","+str(write)+","+str(await)+","+str(svc)+","+str(util)+"\n")
