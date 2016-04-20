@@ -34,14 +34,15 @@ def export_to_csv(data,file_name):
     file_extension = ".csv"
     output_dir, output_file = file_name.rsplit('/', 1)
     output_file = output_file + file_extension
-    header = "container_id,attempt_id,container_no,creation_time,start_time,end_time,node,status\n"
+    header = "container_id,container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status\n"
     output_file_loc = os.path.normpath(os.path.join(output_dir,output_file))
     print "----[python hadoop module]----"
     print "output_file: {}".format(output_file_loc)
     with open(output_file_loc,'w') as f:
         f.write(header)
         for k, v in data.items():
-            line = "{},{},".format(k[0],k[1])
+            #line = "{},{},".format(k[0],k[1])
+            line = "{},".format(k)
             for item in v:
                 line += str(item) + ','
             line = line[:-1] #remove trail comma    
@@ -151,9 +152,9 @@ if __name__=="__main__":
     yarn_rm_file_name = sys.argv[1]
     app_id = sys.argv[3]
     main(yarn_rm_file_name, app_id)
-    print_data(data)
+    #print_data(data)
 
-    #export_to_csv(data, file_name)
+    export_to_csv(data, file_name)
 
 
 # python hadoop_perser.py /home/cloudsys/hadoop/logs/yarn-cloudsys-resourcemanager-proxy.log /home/cloudsys/hadoop_log/wordcount_4M_7899682 1460750106009
