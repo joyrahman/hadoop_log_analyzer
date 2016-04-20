@@ -58,11 +58,11 @@ app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for j
 echo $app_id
 python hadoop_perser.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
 
-mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}
 #consolidate_iostaat_logs
 echo "----[python iostat]----"
 
 mkdir -p  ${output_dir}/{job_id}
+mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}/${job_id}/
 
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
