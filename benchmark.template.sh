@@ -60,8 +60,10 @@ python hadoop_perser.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_
 
 mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}
 #consolidate_iostaat_logs
+echo "----[python iostat]----"
+
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 	echo "[python iostat]: parsing ${iostat_log_name}"
-	python iostat_perser.py /home/cloudsys/iostat_log/${iostat_log_name} &
+	python iostat_perser.py /home/cloudsys/iostat_log/${iostat_log_name} ${output_dir}/${iostat_log_name}.csv
 done
