@@ -19,6 +19,7 @@ import csv
 def extract_node_name(file_name):
     #iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
     #benchmarkname_node_appid_st_et
+    file_name = file_name.rsplit('/',1)[1]
     header = {}
     header['benchmark'] = file_name.split('_')[0]
     header['node'] = file_name.split('_')[1]
@@ -30,7 +31,7 @@ def extract_node_name(file_name):
 def write_to_csv(csv_data,file_name):
     #file_extension = ".csv"
     #output_file = file_name.split('.')[0]+ file_extension
-    header = "time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,svc,util\n"
+    header = "time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,util,node_name\n"
     #output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
     print "output file: " + file_name
 
