@@ -52,10 +52,20 @@ def strip_time(line):
     return line.split(' ')[1]
 
 def get_container_id(line):
+    '''
+    application_1460750106009_0001
+        appattempt_1460750106009_0001_000001
+            container_1460750106009_0001_01_000001
+            container_1460750106009_0001_02_000001
+
+    '''
+
     container_id =  line.split("container_")[1].split(' ')[0].rstrip(',')
-    container_no = (container_id.split("_")[3]).lstrip('0')
+
     attempt_id =    line.split("appattempt_")[1].split(' ')[0].rstrip(',')
-    application_id = (container_id.split("_")[1] + container_id.split("_")[2])
+    application_id = (container_id.split("_")[0] +"_"+ (container_id.split("_")[1])
+    container_no = attempt_id.rsplit("_",1)[1].lstrip('0') +"_"+(container_id.split("_")[3]).lstrip('0')
+
     return container_id, container_no,application_id, attempt_id
     
 
@@ -84,7 +94,7 @@ def get_resource_allocated(line):
 
 
 def get_task_status(line):
-    status = line.split('with event:')[1]
+    status = line.split('with event:')[1].rstrip('\n')
     return  status
 
 def main(file_name, app_id):
