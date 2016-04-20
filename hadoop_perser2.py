@@ -63,8 +63,8 @@ def get_container_id(line):
     container_id =  line.split("container_")[1].split(' ')[0].rstrip(',')
 
     attempt_id =    line.split("appattempt_")[1].split(' ')[0].rstrip(',')
-    application_id = (container_id.split("_")[0] +"_"+ (container_id.split("_")[1])
-    container_no = attempt_id.rsplit("_",1)[1].lstrip('0') +"_"+(container_id.split("_")[3]).lstrip('0')
+    application_id = (container_id.split("_")[0]) +"_"+ (container_id.split("_")[1])
+    container_no = (attempt_id.rsplit("_",1)[1]).lstrip('0') + "_" +(container_id.split("_")[3]).lstrip('0')
 
     return container_id, container_no,application_id, attempt_id
     
