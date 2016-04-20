@@ -15,7 +15,7 @@ hadoop_example_jar="/home/cloudsys/hadoop/share/hadoop/mapreduce/hadoop-mapreduc
 hadoop_input_dir="swift://${hadoop_benchmark}${hadoop_file_size}.SparkTest/"
 hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}${hadoop_file_size}${job_id}"
 hadoop_yarn_file_name="/home/cloudsys/hadoop/logs/yarn-cloudsys-resourcemanager-proxy.log"
-
+output_dir="/home/cloudsys/result"
 
 #iostat_param
 iostat_duration=24
@@ -58,4 +58,10 @@ app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for j
 echo $app_id
 python hadoop_perser.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
 
-#consolidate_iostat_logs
+mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}
+#consolidate_iostaat_logs
+for j in {1..8}; do
+	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
+	echo "[python iostat]: parsing ${iostat_log_name}"
+	python iostat_perser.py /home/cloudsys/iostat_log/${iostat_log_name} &
+done

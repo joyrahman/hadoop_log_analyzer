@@ -17,22 +17,24 @@ import csv
 #fout7 = open("data7.txt",'w');
 
 def extract_node_name(file_name):
+    #iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
     #benchmarkname_node_appid_st_et
     header = {}
     header['benchmark'] = file_name.split('_')[0]
     header['node'] = file_name.split('_')[1]
-    header['appid']    = file_name.split('_')[2]
+    header['size'] = file_name.split('_')[2]
+    header['appid']    = file_name.split('_')[3]
     return header
 
 
 def write_to_csv(csv_data,file_name):
-    file_extension = ".csv"
-    output_file = file_name.split('.')[0]+ file_extension
+    #file_extension = ".csv"
+    #output_file = file_name.split('.')[0]+ file_extension
     header = "time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,svc,util\n"
-    output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
-    print "output file: " + output_file_loc
+    #output_file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),output_file))
+    print "output file: " + file_name
 
-    with open(output_file_loc, 'w') as fp:
+    with open(file_name, 'wa') as fp:
         #header = "ts,user,system,iowait,read,write,await,svc,util"
         #fp.write(header)
         #fp.write("\n")
@@ -48,14 +50,15 @@ def write_to_csv(csv_data,file_name):
 
 
 def main(command_param):
-    file_name=command_param[0]
-    file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),file_name))
-    output_file_name = file_name.split('.')[0]
-    header = extract_node_name(file_name)
-    print "input file: " + file_loc
+    input_file_name=command_param[0]
+    #file_loc = os.path.normpath(os.path.join(os.path.dirname(__file__),input_file_name))
+    #output_file_name = input_file_name.split('.')[0]
+    output_file_name = command_param[1]
+    header = extract_node_name(input_file_name)
+    print "input file: " + input_file_name
     global_data = []
     
-    with open(file_loc,"r") as f:
+    with open(input_file_name,"r") as f:
         lines_after_48 = f.readlines()[2:]
         
         M=0
@@ -85,6 +88,7 @@ def main(command_param):
                     data['ts'] = ts[1]
                     data['node'] = header['node']
                     data['benchmark'] = header['benchmark']
+                    data['size'] = header['size']
                     data['appid'] = header['appid']
                     
                 #third line with cpu utilizaiton     
@@ -149,5 +153,5 @@ if __name__ == "__main__":
     if len(sys.argv)>1:
         main(sys.argv[1:])
     else:
-        print "<exec_name> <input_file_name: wordcount2_object7_111> "
+        print "<exec_name> <input_file_name: wordcount2_object7_111> <output_file>"
         
