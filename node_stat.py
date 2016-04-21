@@ -5,7 +5,8 @@ def main(file_name):
         for line in f:
             data = line.split('@')
             #print data
-            print data[0],data[6],data[10].rstrip('\n')
+            print data[0],data[6]
+               #data[10].rstrip('\n')
 
 
 if __name__=="__main__":
