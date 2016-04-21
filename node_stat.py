@@ -73,10 +73,13 @@ def build_hadoop_data(file_name):
 
 
 def print_data():
+    print header
     print "node_name,\tmax,\tmin,\tavg,\t#sessions,\tcpu_user,\tcpu_system,\tio_wait,\tio_read,\tio_write,\tawait "
     for key, value in result.items():
         print "{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{}".format(key, result[key][0], result[key][1], result[key][2], result[key][3],result[key][4], \
                                                                               result[key][5], result[key][6], result[key][7], result[key][8], result[key][9])
+
+
 
 
 def listdir_fullpath(d):
@@ -132,5 +135,5 @@ if __name__=="__main__":
 
     #print result
     print_data()
-    print header
+
         #print (file_name)
