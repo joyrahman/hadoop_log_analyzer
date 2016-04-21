@@ -11,10 +11,27 @@ result={
         'object8':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0]}
 
 
+header = {}
+
+
+def build_header(file_name):
+    data = file_name.split('_')
+    header['benchmark'] = data[0]
+    header['file_size'] = data[1]
+    header['job_id'] = data[2]
+    with open(file_name,'r')as f:
+        for line in f:
+            if "Running job:" in f:
+                header['start'] = line.split(' ')[0]+' ' + line.split(' ')[1]
+            if "completed successfully" in f:
+                header['end'] = line.split(' ')[0]+' ' + line.split(' ')[1]
+
+
+
 
 def build_hadoop_data(file_name):
 
-    with open (file_name,'r') as f:
+    with open(file_name,'r') as f:
         f.readline()
         for line in f:
             data = line.split('@')
@@ -56,9 +73,9 @@ def build_hadoop_data(file_name):
 
 
 def print_data():
-    print "node_name,\tmax,\t\tmin,\tavg,\t#sessions,\tcpu_user,\tcpu_system,\tio_wait,\tio_read,\tio_write,\tawait "
+    print "node_name,\tmax,\tmin,\tavg,\t#sessions,\tcpu_user,\tcpu_system,\tio_wait,\tio_read,\tio_write,\tawait "
     for key, value in result.items():
-        print "{},\t{},\t\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{}".format(key, result[key][0], result[key][1], result[key][2], result[key][3],result[key][4], \
+        print "{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{}".format(key, result[key][0], result[key][1], result[key][2], result[key][3],result[key][4], \
                                                                               result[key][5], result[key][6], result[key][7], result[key][8], result[key][9])
 
 
@@ -110,7 +127,10 @@ if __name__=="__main__":
             build_iostat_data(file_name)
         elif "csv" in file_name:
             build_hadoop_data(file_name)
+        else:
+            build_header(file_name)
 
     #print result
     print_data()
+    print header
         #print (file_name)
