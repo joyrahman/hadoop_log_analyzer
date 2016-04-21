@@ -34,7 +34,7 @@ def export_to_csv(data,file_name):
     file_extension = ".csv"
     output_dir, output_file = file_name.rsplit('/', 1)
     output_file = output_file + file_extension
-    header = "container_id,container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status\n"
+    header = "container_id@container_no@application_id@attempt_id@start_time@end_time@node_name@cpu_alloc@memory_alloc@container_status\n"
     output_file_loc = os.path.normpath(os.path.join(output_dir,output_file))
     #print "----[python hadoop module]----"
     print "output_file: {}".format(output_file_loc)
@@ -42,13 +42,13 @@ def export_to_csv(data,file_name):
         f.write(header)
         for k, v in data.items():
             #line = "{},{},".format(k[0],k[1])
-            line = "{},".format(k)
+            line = "{}@".format(k)
             i = 0
             for item in v:
                 if(i==4 or i==5):
-                    line += "{}".format(str(item)) + ','
+                    line += "{}".format(str(item)) + '@'
                 else:
-                    line += str(item) + ','
+                    line += str(item) + '@'
                 i+=1
             line = line[:-1] #remove trail comma    
             f.write(line+'\n')
