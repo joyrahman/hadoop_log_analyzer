@@ -91,7 +91,7 @@ if __name__=="__main__":
     if sys.argv<1:
         print "python node_stat.py <dir_name>"
         sys.exit()
-    dir_path=sys.argv[2]
+    dir_path=sys.argv[1]
     listdir = listdir_fullpath(dir_path)
 
     for file_name in listdir:
