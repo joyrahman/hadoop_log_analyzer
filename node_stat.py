@@ -71,7 +71,7 @@ def build_iostat_data(file_name):
         f.readline()
 
         for line in f:
-            data = line.split()
+            data = line.split(',')
             print data
             key = data[8]
             result[key][4] += data[1]
