@@ -50,7 +50,7 @@ for j in {1..8}; do
 done
 
 echo "----[sleeping for 120 sec]----"
-sleep 120
+sleep 240
 
 
 #consolidate_hadoop_logs
