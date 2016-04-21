@@ -64,6 +64,8 @@ echo "----[python iostat]----"
 
 mkdir -p  ${output_dir}/${job_id}
 mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}/${job_id}/
+mv ${hadoop_log_dir}/${hadoop_log_name}.csv  ${output_dir}/${job_id}/
+
 
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"

@@ -43,8 +43,13 @@ def export_to_csv(data,file_name):
         for k, v in data.items():
             #line = "{},{},".format(k[0],k[1])
             line = "{},".format(k)
+            i = 0
             for item in v:
-                line += str(item) + ','
+                if(i==4 or i==5):
+                    line += "{}".format(str(item)) + ','
+                else:
+                    line += str(item) + ','
+                i+=1
             line = line[:-1] #remove trail comma    
             f.write(line+'\n')
     
