@@ -36,7 +36,7 @@ def export_to_csv(data,file_name):
     output_file = output_file + file_extension
     header = "container_id,container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status\n"
     output_file_loc = os.path.normpath(os.path.join(output_dir,output_file))
-    print "----[python hadoop module]----"
+    #print "----[python hadoop module]----"
     print "output_file: {}".format(output_file_loc)
     with open(output_file_loc,'w') as f:
         f.write(header)
@@ -147,7 +147,7 @@ def main(file_name, app_id):
 
 
 if __name__=="__main__":
-    print  sys.argv
+    #print  sys.argv
     if len(sys.argv) < 3:
         print "provide <yarn_rm_file_name> <log_file_name> <job_id>";
         sys.exit();
