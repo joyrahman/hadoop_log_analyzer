@@ -19,7 +19,7 @@ def main(file_name):
             if (data[10]=='duration'):
                 continue
             #print data
-            print data[0],data[6], data[10].rstrip('\n')
+            #print data[0],data[6], data[10].rstrip('\n')
 
             key = data[6]
             value = float(data[10])
@@ -37,8 +37,11 @@ def main(file_name):
             else:
                 print "keynot found"
 
+         print "node_name\tmax\tmin\tavg"
+
         for key,value in result.items():
             result[key][2] = result[key][2]/result[key][3]
+            print "{},\t{},\t{},\t{},\t{}".format(result[key],result[key][0], result[key][1],result[key][2])
 
 
 
@@ -46,4 +49,3 @@ def main(file_name):
 
 if __name__=="__main__":
     main(sys.argv[1])
-    print(result)
