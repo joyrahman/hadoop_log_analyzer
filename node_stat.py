@@ -14,7 +14,7 @@ result={
 
 def build_hadoop_data(file_name):
 
-    with open (file_name1,'r') as f:
+    with open (file_name,'r') as f:
         f.readline()
         for line in f:
             data = line.split('@')
