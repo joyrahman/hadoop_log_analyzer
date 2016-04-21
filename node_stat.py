@@ -37,7 +37,7 @@ def main(file_name):
             else:
                 print "keynot found"
 
-         print "node_name\tmax\tmin\tavg"
+        print "node_name\tmax\tmin\tavg"
 
         for key,value in result.items():
             result[key][2] = result[key][2]/result[key][3]
