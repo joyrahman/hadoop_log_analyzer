@@ -8,9 +8,9 @@ def main(file_name):
             #print data
             print data[0],data[6], data[10].rstrip('\n')
             key = data[6]
-            value = data[10]
+            value = float(data[10].rstrip('\n'))
             if key in result.keys():
-                if float(value)>result[key]:
+                if value>result[key]:
                     result[key]=value
                     print "keyexist"
             else:
