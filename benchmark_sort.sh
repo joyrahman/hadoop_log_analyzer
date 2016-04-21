@@ -55,7 +55,7 @@ sleep 120
 
 # do the clean up of the directory
 sh ~/admin-openrc.sh
-swift delete result ${hadoop_benchmark}${hadoop_file_size}${job_id}
+swift delete result
 
 #consolidate_hadoop_logs
 #get app_id from the file
@@ -68,6 +68,8 @@ echo "----[python iostat]----"
 
 mkdir -p  ${output_dir}/${job_id}
 mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}/${job_id}/
+mv ${hadoop_log_dir}/${hadoop_log_name}.csv  ${output_dir}/${job_id}/
+
 
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
