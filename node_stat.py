@@ -4,7 +4,8 @@ def main(file_name):
     with open (file_name,'r') as f:
         for line in f.readline():
             data = line.split('@')
-            print data[0],data[6]
+            print data
+            #print data[0],data[6]
 
 
 if __name__=="__main__":
