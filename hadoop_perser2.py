@@ -123,20 +123,23 @@ def main(file_name, app_id):
                 container_id, container_no,application_id, attempt_id  = get_container_id(line)
                 start_time = strip_time(line)
                 end_time=0
+                duration=0
                 node_name = get_node_name(line)
                 cpu_alloc,memory_alloc = get_resource_allocated(line)
                 container_status = "NA"
-                data[container_id]=[container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status]
+                data[container_id]=[container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status,duration]
                 
 
                     
             elif parser_container_finish in line and app_id in line:
                  container_id = get_container_id(line)[0]
                  end_time = strip_time(line)
+
                  container_status = get_task_status(line)
                  if container_id in data.keys():
                     data[container_id][4] = end_time
                     data[container_id][8] = container_status
+                    data[container_id][9] = convert_time(end_time , data[container_id][3])
 
 
 
