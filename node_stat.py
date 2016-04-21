@@ -17,16 +17,16 @@ header = {}
 def build_header(file_name):
     #print file_name
     data = file_name.split('_')
-    header['benchmark'] = data[0].rsplit('/')[1]
+    header['benchmark'] = data[0].rsplit('/',1)[1]
     header['file_size'] = data[1]
     header['job_id'] = data[2]
     with open(file_name,'r')as f:
         for line in f:
             #print line
             if "Job started:" in line:
-                header['start'] = line.split('Job started: ')[1]
+                header['start'] = line.split('Job started: ')[1].rstrip('\n')
             if "Job ended: " in line:
-                header['end'] = line.split('Job ended: ')[1]
+                header['end'] = line.split('Job ended: ')[1].rstrip('\n')
 
 
 
