@@ -6,7 +6,7 @@ def main(file_name):
         for line in f:
             data = line.split('@')
             if (data[10]=='duration'):
-                pass
+                continue
             #print data
             print data[0],data[6], data[10].rstrip('\n')
 
