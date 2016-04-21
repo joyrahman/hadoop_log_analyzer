@@ -12,6 +12,7 @@ def main(file_name):
             if key in result.keys():
                 if float(value)>result[key]:
                     result[key]=value
+                    print "keyexist"
             else:
                 result[key]=value
 
