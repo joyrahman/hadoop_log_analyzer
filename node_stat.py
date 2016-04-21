@@ -1,5 +1,15 @@
 import sys
-result={}
+result={'object1':[0.0,0.0,0.0,0],\
+        'object2':[0.0,0.0,0.0,0],\
+        'object3':[0.0,0.0,0.0,0],\
+        'object4':[0.0,0.0,0.0,0],\
+        'object5':[0.0,0.0,0.0,0],\
+        'object6':[0.0,0.0,0.0,0],\
+        'object7':[0.0,0.0,0.0,0],\
+        'object8':[0.0,0.0,0.0,0]}
+
+
+
 def main(file_name):
 
     with open (file_name,'r') as f:
@@ -14,11 +24,23 @@ def main(file_name):
             key = data[6]
             value = float(data[10])
             if key in result.keys():
-                if value>result[key]:
-                    result[key]=value
-                    print "keyexist"
+                #max
+                if value>result[key][0]:
+                    result[key][0]=value
+                #min
+                if value<result[key][1]:
+                    result[key][1]=value
+                #avg
+                result[key][2] += value
+                result[key][3] +=1
+
             else:
-                result[key]=value
+                print "keynot found"
+
+        for key,value in result.items():
+            result[key][2] = result[key][2]/result[key][3]
+
+
 
 
 
