@@ -100,7 +100,7 @@ if __name__=="__main__":
         #os.path.join(__file__,'data',file_name)
         if "object" and "csv" in file_name:
             build_iostat_data(file_name)
-        else if "csv" in file_name:
+        elif "csv" in file_name:
             build_hadoop_data(file_name)
 
     print result
