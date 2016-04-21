@@ -2,7 +2,7 @@ import sys
 def main(file_name):
 
     with open (file_name,'r') as f:
-        for line in f.readline():
+        for line in f:
             data = line.split('@')
             print data
             #print data[0],data[6]
