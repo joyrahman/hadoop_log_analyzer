@@ -41,7 +41,7 @@ def main(file_name):
 
         for key,value in result.items():
             result[key][2] = result[key][2]/result[key][3]
-            print "{},\t{},\t{},\t{},\t{}".format(result[key],result[key][0], result[key][1],result[key][2])
+            print "{},\t{},\t{},\t{}".format(result[key],result[key][0], result[key][1],result[key][2])
 
 
 
