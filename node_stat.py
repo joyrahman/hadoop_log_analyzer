@@ -65,7 +65,7 @@ def build_iostat_data(file_name):
 
     key = "null"
     total_item = 0
-    with open(file_name2, 'r') as f:
+    with open(file_name, 'r') as f:
         # time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,util,node_name
         #         ,    4   ,     5    ,  6     , 7    ,   8     , 9
         f.readline()
