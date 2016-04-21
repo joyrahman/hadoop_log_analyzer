@@ -15,6 +15,7 @@ header = {}
 
 
 def build_header(file_name):
+    print file_name
     data = file_name.split('_')
     header['benchmark'] = data[0]
     header['file_size'] = data[1]
