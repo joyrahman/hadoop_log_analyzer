@@ -37,8 +37,6 @@ def build_hadoop_data(file_name):
         f.readline()
         for line in f:
             data = line.split('@')
-            if (data[10]=='duration'):
-                continue
             #print data
             #print data[0],data[6], data[10].rstrip('\n')
 
