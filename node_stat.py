@@ -78,7 +78,7 @@ def build_iostat_data(file_name):
 
         for line in f:
             data = line.split(',')
-            print data
+            #print data
             key = data[8].rstrip('\n')
             result[key][4] += float(data[1])
             result[key][5] += float(data[2])
@@ -104,7 +104,7 @@ if __name__=="__main__":
 
     for file_name in listdir:
 
-        print file_name
+        print "[ processing {}]".format(file_name)
         #os.path.join(__file__,'data',file_name)
         if "object" in file_name:
             build_iostat_data(file_name)
