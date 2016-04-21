@@ -2,8 +2,8 @@ import sys
 def main(file_name):
 
     with open (file_name,'r') as f:
-        line = f.readline()
-        print line
+        for line in f.readline():
+            print line[0],line[6],line[8]
 
 
 if __name__=="__main__":
