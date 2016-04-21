@@ -54,8 +54,8 @@ sleep 240
 
 
 # do the clean up of the directory
-sh ~/admin-openrc.sh
-swift delete result
+#sh ~/admin-openrc.sh
+#swift delete result
 
 #consolidate_hadoop_logs
 #get app_id from the file
