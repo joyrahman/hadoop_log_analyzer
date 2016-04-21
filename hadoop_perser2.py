@@ -121,7 +121,7 @@ def main(file_name, app_id):
 
             if parser_container_creation in line and app_id in line:
                 container_id, container_no,application_id, attempt_id  = get_container_id(line)
-                start_time = strip_time(line)
+                start_time = "{}".format(strip_time(line))
                 end_time=0
                 duration=0
                 node_name = get_node_name(line)
@@ -133,7 +133,7 @@ def main(file_name, app_id):
                     
             elif parser_container_finish in line and app_id in line:
                  container_id = get_container_id(line)[0]
-                 end_time = strip_time(line)
+                 end_time = "{}".format(strip_time(line))
 
                  container_status = get_task_status(line)
                  if container_id in data.keys():
