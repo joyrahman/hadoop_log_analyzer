@@ -34,7 +34,7 @@ def export_to_csv(data,file_name):
     file_extension = ".csv"
     output_dir, output_file = file_name.rsplit('/', 1)
     output_file = output_file + file_extension
-    header = "container_id@container_no@application_id@attempt_id@start_time@end_time@node_name@cpu_alloc@memory_alloc@container_status\n"
+    header = "container_id@container_no@application_id@attempt_id@start_time@end_time@node_name@cpu_alloc@memory_alloc@container_status@duration\n"
     output_file_loc = os.path.normpath(os.path.join(output_dir,output_file))
     #print "----[python hadoop module]----"
     print "output_file: {}".format(output_file_loc)
