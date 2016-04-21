@@ -37,11 +37,11 @@ def main(file_name):
             else:
                 print "keynot found"
 
-        print "node_name,\tmax,\t\tmin,\tavg"
+        print "node_name,\tmax,\t\tmin,\tavg,\t#sessions"
 
         for key,value in result.items():
             result[key][2] = result[key][2]/result[key][3]
-            print "{},\t{},\t\t{},\t{}".format(key,result[key][0], result[key][1],result[key][2])
+            print "{},\t{},\t\t{},\t{}\t{}".format(key,result[key][0], result[key][1],result[key][2],result[key][3])
 
 
 
