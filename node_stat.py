@@ -23,10 +23,10 @@ def build_header(file_name):
     with open(file_name,'r')as f:
         for line in f:
             #print line
-            if "Job started:" in line:
-                header['start'] = line.split('Job started: ')[1].rstrip('\n')
-            if "Job ended: " in line:
-                header['end'] = line.split('Job ended: ')[1].rstrip('\n')
+            if "Running job:" in line:
+                header['start'] = line.split(' ')[0] + line.split(' ')[1]
+            if "completed successfully" in line:
+                header['end'] = line.split(' ')[0] + line.split(' ')[1]
 
 
 
