@@ -21,13 +21,12 @@ def build_header(file_name):
     header['file_size'] = data[1]
     header['job_id'] = data[2]
     with open(file_name,'r')as f:
-
         for line in f:
             print line
-            if "Running job:" in f:
-                header['start'] = line.split(' ')[0]+' ' + line.split(' ')[1]
-            if "completed successfully" in f:
-                header['end'] = line.split(' ')[0]+' ' + line.split(' ')[1]
+            if "Job started:" in f:
+                header['start'] = line.split('Job started: ')[1]
+            if "Job ended: " in f:
+                header['end'] = line.split(' Job ended: ')[1]
 
 
 
