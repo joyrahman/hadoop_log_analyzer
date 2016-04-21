@@ -64,7 +64,7 @@ def listdir_fullpath(d):
 def build_iostat_data(file_name):
 
     key = "null"
-    total_item = 0
+    total_item = 0.0
     with open(file_name, 'r') as f:
         # time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,util,node_name
         #         ,    4   ,     5    ,  6     , 7    ,   8     , 9
@@ -74,12 +74,12 @@ def build_iostat_data(file_name):
             data = line.split(',')
             print data
             key = data[8].rstrip('\n')
-            result[key][4] += data[1]
-            result[key][5] += data[2]
-            result[key][6] += data[3]
-            result[key][7] += data[4]
-            result[key][8] += data[5]
-            result[key][9] += data[6]
+            result[key][4] += float(data[1])
+            result[key][5] += float(data[2])
+            result[key][6] += float(data[3])
+            result[key][7] += float(data[4])
+            result[key][8] += float(data[5])
+            result[key][9] += float(data[6])
             total_item += 1
         for i in range(4,10):
             result[key][i] = result[key][i] / total_item
