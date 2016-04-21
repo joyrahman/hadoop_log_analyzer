@@ -3,6 +3,7 @@ result={}
 def main(file_name):
 
     with open (file_name,'r') as f:
+        f.readline()
         for line in f:
             data = line.split('@')
             if (data[10]=='duration'):
