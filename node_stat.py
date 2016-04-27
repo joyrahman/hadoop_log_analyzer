@@ -87,7 +87,7 @@ def listdir_fullpath(d):
 
 
 
-def find_max(new_data,stored_data)
+def find_max(new_data,stored_data):
     result = stored_data
     if new_data>stored_data:
          result = new_data
