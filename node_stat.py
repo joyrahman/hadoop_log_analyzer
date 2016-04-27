@@ -1,15 +1,14 @@
 import sys
 import os
 result={
-		'object1':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object2':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object3':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object4':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object5':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object6':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object7':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0],\
-        'object8':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0]}
-
+		'object1':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object2':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object3':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object4':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object5':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object6':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object7':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],\
+        'object8':[0.0,500.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]}
 
 header = {}
 
@@ -75,10 +74,10 @@ def build_hadoop_data(file_name):
 def print_data():
     print "--------------------------------------------"
     print "{},\t{},\t{},\t{},\t{}".format(header['job_id'],header['benchmark'],header['file_size'],header['start'],header['end'])
-    print "node_name,\tmax,\tmin,\tavg,\t#sessions,\tcpu_user,\tcpu_system,\tio_wait,\tio_read,\tio_write,\tawait "
+    print "node_name,\tmax,\tmin,\tavg,\t#sessions,\tcpu_user,\tcpu_system,\tio_wait,\tio_read,\tio_write,\tawait,\tutil "
     for key, value in result.items():
         print "{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{},\t{}".format(key, result[key][0], result[key][1], result[key][2], result[key][3],result[key][4], \
-                                                                              result[key][5], result[key][6], result[key][7], result[key][8], result[key][9])
+                                                                              result[key][5], result[key][6], result[key][7], result[key][8], result[key][9],result[key][10])
     print "--------------------------------------------"
 
 
@@ -88,28 +87,36 @@ def listdir_fullpath(d):
 
 
 
+def find_max(new_data,stored_data)
+    result = stored_data
+    if new_data>stored_data:
+         result = new_data
+
+    return result
+
 def build_iostat_data(file_name):
 
     key = "null"
     total_item = 0.0
     with open(file_name, 'r') as f:
         # time_stamp,cpu_user,cpu_system,io_wait,io_read,io_write,await,util,node_name
-        #         ,    4   ,     5    ,  6     , 7    ,   8     , 9
+        #         ,    4   ,     5    ,  6     , 7    ,   8     , 9, 10
         f.readline()
 
         for line in f:
             data = line.split(',')
             #print data
             key = data[8].rstrip('\n')
-            result[key][4] += float(data[1])
-            result[key][5] += float(data[2])
-            result[key][6] += float(data[3])
-            result[key][7] += float(data[4])
-            result[key][8] += float(data[5])
-            result[key][9] += float(data[6])
+            result[key][4] = find_max(float(data[1]),result[key][4])
+            result[key][5] = find_max(float(data[2]),result[key][5])
+            result[key][6] = find_max(float(data[3]),result[key][6])
+            result[key][7] = find_max(float(data[4]),result[key][7])
+            result[key][8] = find_max(float(data[5]),result[key][8])
+            result[key][9] = find_max(float(data[6]),result[key][9])
+            result[key][10]= find_max(float(data[7]),result[key][10])
             total_item += 1
-        for i in range(4,10):
-            result[key][i] = result[key][i] / total_item
+        # for i in range(4,10):
+        #     result[key][i] = result[key][i] / total_item
 
 
 
