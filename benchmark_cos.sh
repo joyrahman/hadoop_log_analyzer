@@ -49,8 +49,19 @@ iostat_log_dir="/home/cloudsys/iostat_log"
 #	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 #done
 #
+echo "----[running cosbench]----"
+ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_128K.xml'
+
 #echo "----[sleeping for 120 sec]----"
-#sleep 120
+sleep 120
+
+echo "----[running iostat]----"
+for j in {1..8}; do
+	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
+	echo "[iostat log]: ${iostat_log_name}"
+	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
+done
+
 
 
 # do the clean up of the directory
