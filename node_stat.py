@@ -114,6 +114,7 @@ def build_iostat_data(file_name):
             result[key][8] = find_max(float(data[5]),result[key][8])
             result[key][9] = find_max(float(data[6]),result[key][9])
             result[key][10]= find_max(float(data[7]),result[key][10])
+            print "util:", data[7]
             total_item += 1
         # for i in range(4,10):
         #     result[key][i] = result[key][i] / total_item
