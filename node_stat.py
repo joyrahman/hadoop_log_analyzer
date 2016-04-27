@@ -133,7 +133,7 @@ if __name__=="__main__":
 
     for file_name in listdir:
 
-        print "[ processing {}]".format(file_name)
+        #print "[ processing {}]".format(file_name)
         #os.path.join(__file__,'data',file_name)
         if "object" in file_name:
             build_iostat_data(file_name)
