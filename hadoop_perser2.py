@@ -112,6 +112,7 @@ def main(file_name, app_id):
     # output to json file
     jobfound = False
 
+    print ("running on:",app_id)
 
     #LeafQueue: assignedContainer application attempt=appattempt_1460750106009_0001_000002 container=Container: [ContainerId: container_1460750106009_0001_02_000001, NodeId: object4:42773, NodeHttpAddress: object4:8042, Resource: <memory:2048, vCores:1>, Priority: 0, Token: null, ] queue=default: capacity=1.0, absoluteCapacity=1.0, usedResources=<memory:0, vCores:0>, usedCapacity=0.0, absoluteUsedCapacity=0.0, numApps=1, numContainers=0 clusterResource=<memory:65536, vCores:64>
     parser_container_creation   = "LeafQueue: assignedContainer application"
