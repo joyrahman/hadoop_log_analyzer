@@ -59,7 +59,7 @@ sleep 120
 
 #consolidate_hadoop_logs
 #get app_id from the file
-app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for job" | cut -f 5 -d":"  | cut -f 2 -d "_"`
+app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for job" | cut -f 5 -d":"  | cut -f 2,3 -d "_"`
 echo $app_id
 python hadoop_perser2.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
 

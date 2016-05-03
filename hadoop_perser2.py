@@ -126,7 +126,7 @@ def main(file_name, app_id):
         for line in f:
 
             if parser_container_creation in line and app_id in line:
-                print("[Debug:{}]{}".format(app_id,line))
+                #print("[Debug:{}]{}".format(app_id,line))
                 container_id, container_no,application_id, attempt_id  = get_container_id(line)
                 start_time = "{}".format(strip_time(line))
                 end_time=0
