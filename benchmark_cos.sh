@@ -53,7 +53,7 @@ echo "----[running cosbench]----"
 ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_128K.xml'
 
 #echo "----[sleeping for 120 sec]----"
-sleep 120
+sleep 70
 
 echo "----[running iostat]----"
 for j in {1..8}; do
