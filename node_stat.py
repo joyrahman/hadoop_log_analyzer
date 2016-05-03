@@ -139,6 +139,8 @@ if __name__=="__main__":
             build_iostat_data(file_name)
         elif "csv" in file_name:
             build_hadoop_data(file_name)
+        elif "summary" in file_name:
+            pass
         else:
             build_header(file_name)
 
