@@ -72,3 +72,5 @@ for j in {1..8}; do
 	echo "[python iostat]: parsing ${iostat_log_name}"
 	python iostat_perser.py /home/cloudsys/iostat_log/${iostat_log_name} ${output_dir}/${job_id}/${iostat_log_name}.csv
 done
+
+python ~/hadoop_log_analyzer/node_stat.py ${output_dir}/${job_id} > ${output_dir}/${job_id}/summaryfs
