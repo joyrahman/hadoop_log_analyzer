@@ -1,6 +1,6 @@
 source ~/admin-openrc.sh
 swift delete result
-cd hadoop_log_analyzer
+cd ~/hadoop_log_analyzer
 source benchmark_sort_cos.sh 0505201541 4M
 sleep 300
 source benchmark_grep_cos.sh 0505201542 4M
@@ -19,7 +19,7 @@ sleep 300
 
 source ~/admin-openrc.sh
 swift delete result
-cd hadoop_log_analyzer
+cd ~/hadoop_log_analyzer
 source benchmark_sort.sh 0505201544 4M
 sleep 300
 source benchmark_grep.sh 0505201545 4M
