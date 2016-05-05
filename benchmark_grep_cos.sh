@@ -7,13 +7,13 @@
 job_id=$1
 #hadoop_file_size="4M"
 hadoop_file_size=$2
-hadoop_benchmark="sort"
+hadoop_benchmark="grep"
 hadoop_executable="/home/cloudsys/hadoop/bin/hadoop"
 hadoop_log_dir="/home/cloudsys/hadoop_log"
 hadoop_log_name="${hadoop_benchmark}_${hadoop_file_size}_${job_id}"
 hadoop_app_id=""
 hadoop_example_jar="/home/cloudsys/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar"
-hadoop_input_dir="swift://randominput${hadoop_file_size}.SparkTest/"
+hadoop_input_dir="swift://wordcount${hadoop_file_size}.SparkTest/"
 hadoop_output_dir="swift://result.SparkTest/${hadoop_benchmark}${hadoop_file_size}${job_id}"
 hadoop_yarn_file_name="/home/cloudsys/hadoop/logs/yarn-cloudsys-resourcemanager-proxy.log"
 output_dir="/home/cloudsys/result"
@@ -23,11 +23,12 @@ iostat_duration=24
 iostat_interval=5
 iostat_log_dir="/home/cloudsys/iostat_log"
 
-
-
 echo "----[running cos]----"
 ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_128K.xml'
 sleep 70
+
+
+
 
 
 echo "----[running benchmark]----"
@@ -36,7 +37,7 @@ echo "input_dir: $hadoop_input_dir"
 echo "output_dir: $hadoop_output_dir"
 echo "log: $hadoop_log_name"
 #echo "${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} > ${hadoop_log_dir}/${hadoop_log_name}" 2>&1 &
-torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir}"
+torun="${hadoop_executable} jar ${hadoop_example_jar} ${hadoop_benchmark} ${hadoop_input_dir} ${hadoop_output_dir} 'Th' "
 out="${hadoop_log_dir}/${hadoop_log_name}"
 #/home/cloudsys/hadoop/bin/hadoop jar $hadoop_example_jar $hadoop_benchmark $hadoop_input_dir $hadoop_output_dir > $hadoop_log_dir/$hadoop_log_name 2>&1 &
 #echo "${torun} >${out} 2>&1 &"
@@ -52,18 +53,14 @@ for j in {1..8}; do
 	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
-echo "----[sleeping for 120 sec]----"
-sleep 120
+echo "----[sleeping for 240 sec]----"
+sleep 240
 
-
-# do the clean up of the directory
-#sh ~/admin-openrc.sh
-#swift delete result
 
 #consolidate_hadoop_logs
 #get app_id from the file
 app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for job" | cut -f 5 -d":"  | cut -f 2,3 -d "_"`
-echo "appid : ${app_id}"
+echo $app_id
 python hadoop_perser2.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
 
 #consolidate_iostaat_logs
