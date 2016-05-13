@@ -135,7 +135,7 @@ def main(file_name, app_id):
                 cpu_alloc,memory_alloc = get_resource_allocated(line)
                 container_status = "NA"
                 data[container_id]=[container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status,duration]
-                
+                print "[debug:]",line
 
                     
             elif parser_container_finish in line and app_id in line:
