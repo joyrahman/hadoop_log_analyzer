@@ -142,6 +142,7 @@ def main(file_name, app_id):
 
                     
             elif parser_container_finish in line and app_id in line:
+                 print "[debug:]",line
                  container_id = get_container_id(line)[0]
                  end_time = "{}".format(strip_time(line))
 
