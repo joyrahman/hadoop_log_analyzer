@@ -31,7 +31,7 @@ def get_task_status(line):
     #return line.split('EVENT=')[1].split('\t')[0]
     
 def export_to_csv(data,file_name):
-    print data
+    #print data
     file_extension = ".csv"
     output_dir, output_file = file_name.rsplit('/', 1)
     output_file = output_file + file_extension
@@ -53,6 +53,8 @@ def export_to_csv(data,file_name):
                 i+=1
             line = line[:-1] #remove trail comma    
             f.write(line+'\n')
+            print line
+
     
             
 def strip_time(line):
