@@ -1,0 +1,45 @@
+> hadoop configuration check (slaves,site.xml etc)
+> folder permission check (/app/hadoop , /tmp)
+> /etc/hosts check
+> java version check
+> disk space check
+> jps check
+> proxy log check
+> date
+> data_node_version
+
+
+when you format namenode, make sure to empty /app/hadoop/tmp/dfs/name/data/*
+
+adhoc command
+for j in {1..8}; do
+    ssh object$j 'hostname && df -H '
+    done
+
+
+for j in {1..8}; do
+ssh object$j 'date'
+done
+
+
+for j in {1..8}; do
+ssh object$j 'hostname && cat /app/hadoop/tmp/dfs/name/data/current/VERSION | grep clusterID'
+done
+
+for j in {1..8}; do
+    ssh object$j 'cat ~/hadoop/etc/hadoop/slaves  && cat /etc/hosts' >> report$j.txt
+    done
+
+
+
+for j in {1..8}; do
+ssh object$j 'jps'
+done
+
+
+## rebalance proxy
+for j in {1..8}; do
+ssh object$j 'echo cloudsys | sudo -S chmod 777 /etc/swift/*'
+ssh object$j 'echo cloudsys | sudo -S chown swift:swift /etc/swift/*'
+ssh object$j 'echo cloudsys | sudo -S sudo swift-init all restart'
+done
