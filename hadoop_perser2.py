@@ -31,6 +31,7 @@ def get_task_status(line):
     #return line.split('EVENT=')[1].split('\t')[0]
     
 def export_to_csv(data,file_name):
+    print data
     file_extension = ".csv"
     output_dir, output_file = file_name.rsplit('/', 1)
     output_file = output_file + file_extension
@@ -135,7 +136,7 @@ def main(file_name, app_id):
                 cpu_alloc,memory_alloc = get_resource_allocated(line)
                 container_status = "NA"
                 data[container_id]=[container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status,duration]
-                print "[debug:]",line
+                #print "[debug:]",line
 
                     
             elif parser_container_finish in line and app_id in line:
