@@ -88,7 +88,7 @@ def get_os_file_name(file_name):
 
 def convert_time(e,s):
     # 22:40:11,178
-    FMT = '%H:%M:%S,%f'
+    FMT = '%H:%M:%S.%f'
     tdelta = datetime.datetime.strptime(e, FMT) - datetime.datetime.strptime(s, FMT)
     seconds = tdelta.total_seconds()
     return seconds
