@@ -115,6 +115,10 @@ def main(file_name, app_id):
     # output to json file
     jobfound = False
 
+    local_time = datetime.datetime.now()
+    utc_time  = datetime.datetime.utcnow()
+    time_delta = utc_time - local_time
+
     print ("running on:",app_id)
 
     #LeafQueue: assignedContainer application attempt=appattempt_1460750106009_0001_000002 container=Container: [ContainerId: container_1460750106009_0001_02_000001, NodeId: object4:42773, NodeHttpAddress: object4:8042, Resource: <memory:2048, vCores:1>, Priority: 0, Token: null, ] queue=default: capacity=1.0, absoluteCapacity=1.0, usedResources=<memory:0, vCores:0>, usedCapacity=0.0, absoluteUsedCapacity=0.0, numApps=1, numContainers=0 clusterResource=<memory:65536, vCores:64>
@@ -131,26 +135,33 @@ def main(file_name, app_id):
             if parser_container_creation in line and app_id in line:
                 #print("[Debug:{}]{}".format(app_id,line))
                 container_id, container_no,application_id, attempt_id  = get_container_id(line)
-                start_time = "{}".format(strip_time(line))
-                end_time=0
+                #start_time = "{}".format(strip_time(line))
+                start_time = datetime.datetime.strptime(strip_time(line), "%H:%M:%S,%f")
+                start_time = start_time - time_delta
+                start_time_string = "{}:{}:{}.{}".format(start_time.hour, start_time.minute, start_time.second, start_time.microsecond)
+                #end_time= datetime.datetime.now()
+                end_time = start_time
                 duration=0
                 node_name = get_node_name(line)
                 cpu_alloc,memory_alloc = get_resource_allocated(line)
                 container_status = "NA"
-                data[container_id]=[container_no,application_id,attempt_id,start_time,end_time,node_name,cpu_alloc,memory_alloc,container_status,duration]
+                data[container_id]=[container_no,application_id,attempt_id,start_time_string,end_time,node_name,cpu_alloc,memory_alloc,container_status,duration]
                 #print "[debug:]",line
 
                     
             elif parser_container_finish in line and app_id in line:
                  print "[debug:]",line
                  container_id = get_container_id(line)[0]
-                 end_time = "{}".format(strip_time(line))
+                 #end_time = "{}".format(strip_time(line))
+                 end_time = datetime.datetime.strptime(strip_time(line), "%H:%M:%S,%f")
+                 end_time = end_time - time_delta
+                 end_time_string = "{}:{}:{}.{}".format(end_time.hour, end_time.minute, end_time.second, end_time.microsecond)
 
                  container_status = get_task_status(line)
                  if container_id in data.keys():
-                    data[container_id][4] = end_time
+                    data[container_id][4] = end_time_string
                     data[container_id][8] = container_status
-                    data[container_id][9] = convert_time(end_time , data[container_id][3])
+                    data[container_id][9] = convert_time(end_time_string , data[container_id][3])
 
 
 
