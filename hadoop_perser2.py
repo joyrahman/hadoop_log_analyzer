@@ -142,11 +142,12 @@ def main(file_name, app_id):
                 start_time_string = "{}:{}:{}.{}".format(start_time.hour, start_time.minute, start_time.second, start_time.microsecond)
                 #end_time= datetime.datetime.now()
                 end_time = start_time
+                end_time_string = start_time_string
                 duration=0
                 node_name = get_node_name(line)
                 cpu_alloc,memory_alloc = get_resource_allocated(line)
                 container_status = "NA"
-                data[container_id]=[container_no,application_id,attempt_id,start_time_string,end_time,node_name,cpu_alloc,memory_alloc,container_status,duration]
+                data[container_id]=[container_no,application_id,attempt_id,start_time_string,end_time_string,node_name,cpu_alloc,memory_alloc,container_status,duration]
                 #print "[debug:]",line
 
                     
