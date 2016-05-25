@@ -53,7 +53,7 @@ for j in {1..8}; do
 	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
-echo "----[sleeping for 240 sec]----"
+echo "----[sleeping for 400 sec]----"
 sleep 400
 
 
