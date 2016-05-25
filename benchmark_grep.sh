@@ -46,11 +46,11 @@ echo "----[running iostat]----"
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 	echo "[iostat log]: ${iostat_log_name}"
-	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 24'  > /home/cloudsys/iostat_log/${iostat_log_name} &
+	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
 echo "----[sleeping for 240 sec]----"
-sleep 240
+sleep 400
 
 
 #consolidate_hadoop_logs
