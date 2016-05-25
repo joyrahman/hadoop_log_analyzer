@@ -35,7 +35,7 @@ def build_hadoop_data(file_name):
     with open(file_name,'r') as f:
         f.readline()
         for line in f:
-            data = line.split('@')
+            data = line.split(',')
             #print data
             #print data[0],data[6], data[10].rstrip('\n')
 
