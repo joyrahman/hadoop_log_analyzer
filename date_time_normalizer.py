@@ -26,14 +26,14 @@ ut = datetime.datetime.utcnow()
 print ("local_time",lt)
 print ("utc_time",ut)
 
-delta  = ut - lt
+delta  = ut.hour - lt.hour
 
 print sample_start_time
 
 date_object = datetime.datetime.strptime(sample_start_time, "%H:%M:%S,%f")
 
 print "old_date",date_object
-date_object_update = date_object - delta
+date_object = date_object - datetime.timedelta(hours=delta)
 #nt = ut - nt_delta
 #print ("updated time", ut-nt)
-print date_object_update.hour,date_object.minute,date_object.second, date_object.microsecond
+print date_object.hour,date_object.minute,date_object.second, date_object.microsecond

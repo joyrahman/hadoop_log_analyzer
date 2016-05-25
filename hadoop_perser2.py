@@ -118,7 +118,7 @@ def main(file_name, app_id):
 
     local_time = datetime.datetime.now()
     utc_time  = datetime.datetime.utcnow()
-    time_delta = utc_time - local_time
+    time_delta = utc_time.hour - local_time.hour
 
     print ("running on:",app_id)
 
@@ -138,7 +138,7 @@ def main(file_name, app_id):
                 container_id, container_no,application_id, attempt_id  = get_container_id(line)
                 #start_time = "{}".format(strip_time(line))
                 start_time = datetime.datetime.strptime(strip_time(line), "%H:%M:%S,%f")
-                start_time = start_time - time_delta
+                start_time = start_time - datetime.timedelta(hours=time_delta)
                 start_time_string = "{}:{}:{}.{}".format(start_time.hour, start_time.minute, start_time.second, start_time.microsecond)
                 #end_time= datetime.datetime.now()
                 end_time = start_time
@@ -156,7 +156,7 @@ def main(file_name, app_id):
                  container_id = get_container_id(line)[0]
                  #end_time = "{}".format(strip_time(line))
                  end_time = datetime.datetime.strptime(strip_time(line), "%H:%M:%S,%f")
-                 end_time = end_time - time_delta
+                 end_time = end_time - datetime.timedelta(hours=time_delta)
                  end_time_string = "{}:{}:{}.{}".format(end_time.hour, end_time.minute, end_time.second, end_time.microsecond)
 
                  container_status = get_task_status(line)
