@@ -64,7 +64,8 @@ def main(command_param):
         
         M=0
         N = 7
-        while(N<157):
+        #init val was 157
+        while(N<400):
             lines_gen = islice(lines_after_48, M,N)
             #print "------------------------------"
             #print (lines_gen)
