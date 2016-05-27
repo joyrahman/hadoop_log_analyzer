@@ -42,7 +42,7 @@ out="${hadoop_log_dir}/${hadoop_log_name}"
 #/home/cloudsys/hadoop/bin/hadoop jar $hadoop_example_jar $hadoop_benchmark $hadoop_input_dir $hadoop_output_dir > $hadoop_log_dir/$hadoop_log_name 2>&1 &
 #echo "${torun} >${out} 2>&1 &"
 #${torun} >${out} 2>&1 &
-${torun}
+${torun} &
 sleep 5
 
 #iostat
