@@ -19,8 +19,10 @@ hadoop_yarn_file_name="/home/cloudsys/hadoop/logs/yarn-cloudsys-resourcemanager-
 output_dir="/home/cloudsys/result"
 
 #iostat_param
-iostat_duration=24
+iostat_total=480
 iostat_interval=5
+iostat_duration=${iostat_total}/${iostat_interval}
+
 iostat_log_dir="/home/cloudsys/iostat_log"
 
 
@@ -46,11 +48,11 @@ echo "----[running iostat]----"
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 	echo "[iostat log]: ${iostat_log_name}"
-	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42'  > /home/cloudsys/iostat_log/${iostat_log_name} &
+	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 96'  > /home/cloudsys/iostat_log/${iostat_log_name} &
 done
 
-echo "----[sleeping for 400 sec]----"
-sleep 400
+echo "----[sleeping for 500 sec]----"
+sleep 500
 
 
 #consolidate_hadoop_logs
