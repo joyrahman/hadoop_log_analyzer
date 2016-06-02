@@ -1,0 +1,37 @@
+Linux 3.13.0-76-generic (object5) 	04/18/2016 	_x86_64_	(4 CPU)
+
+04/18/2016 04:32:26 PM
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           2.23    0.00    1.25    1.12    0.00   95.40
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.03    16.73   22.70    6.05     2.81     0.10   207.55     0.24    8.26    1.26   34.55   1.66   4.77
+
+04/18/2016 04:32:31 PM
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           4.46    0.00    1.65    0.00    0.00   93.89
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.00     2.40    0.00    1.00     0.00     0.01    28.80     0.00    1.60    0.00    1.60   1.60   0.16
+
+04/18/2016 04:32:36 PM
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.70    0.00    0.65    0.05    0.00   98.60
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.00     3.00    0.00    0.80     0.00     0.01    38.00     0.00    3.00    0.00    3.00   3.00   0.24
+
+04/18/2016 04:32:41 PM
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.60    0.00    0.70    0.00    0.00   98.69
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.00     2.20    0.00    0.40     0.00     0.01    52.00     0.00    2.00    0.00    2.00   2.00   0.08
+
+04/18/2016 04:32:46 PM
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.45    0.00    0.45    0.00    0.00   99.10
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.00     0.40    0.00    0.40     0.00     0.00    16.00     0.00    2.00    0.00    2.00   2.00   0.08
+

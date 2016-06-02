@@ -1,0 +1,9 @@
+Linux 3.13.0-76-generic (object7) 	04/18/2016 	_x86_64_	(4 CPU)
+
+04/18/2016 04:32:45 PM
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.46    0.00    0.50    0.01    0.00   98.03
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.01     1.61    0.02    2.95     0.00     0.04    26.27     0.03   11.09    1.50   11.16   0.61   0.18
+
