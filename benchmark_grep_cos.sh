@@ -63,21 +63,21 @@ sleep 400
 #get app_id from the file
 app_id=`cat ${hadoop_log_dir}/${hadoop_log_name} | grep "Submitting tokens for job" | cut -f 5 -d":"  | cut -f 2,3 -d "_"`
 echo $app_id
-python hadoop_perser2.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}
+echo "python hadoop_perser2.py ${hadoop_yarn_file_name} ${hadoop_log_dir}/${hadoop_log_name}  ${app_id}"
 
 #consolidate_iostaat_logs
 echo "----[python iostat]----"
 
-mkdir -p  ${output_dir}/${job_id}
-mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}/${job_id}/
-mv ${hadoop_log_dir}/${hadoop_log_name}.csv  ${output_dir}/${job_id}/
+echo "mkdir -p  ${output_dir}/${job_id}"
+echo "mv ${hadoop_log_dir}/${hadoop_log_name}  ${output_dir}/${job_id}/"
+echo "mv ${hadoop_log_dir}/${hadoop_log_name}.csv  ${output_dir}/${job_id}/"
 
 
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 	echo "[python iostat]: parsing ${iostat_log_name}"
-	python iostat_perser.py /home/cloudsys/iostat_log/${iostat_log_name} ${output_dir}/${job_id}/${iostat_log_name}.csv
+	echo "python iostat_perser.py /home/cloudsys/iostat_log/${iostat_log_name} ${output_dir}/${job_id}/${iostat_log_name}.csv"
 done
 
 
-python ~/hadoop_log_analyzer/node_stat.py ${output_dir}/${job_id} > ${output_dir}/${job_id}/summary
+echo "python ~/hadoop_log_analyzer/node_stat.py ${output_dir}/${job_id} > ${output_dir}/${job_id}/summary"
