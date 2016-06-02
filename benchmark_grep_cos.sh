@@ -24,8 +24,8 @@ iostat_interval=5
 iostat_log_dir="/home/cloudsys/iostat_log"
 
 echo "----[running cos]----"
-#ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_128K.xml'
-#sleep 70
+ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_128K.xml'
+sleep 70
 
 
 
@@ -43,7 +43,7 @@ out="${hadoop_log_dir}/${hadoop_log_name}"
 #echo "${torun} >${out} 2>&1 &"
 #${torun} >${out} 2>&1 &
 ${torun} &
-sleep 5
+#sleep 5
 
 #iostat
 
@@ -51,8 +51,8 @@ echo "----[running iostat]----"
 for j in {1..8}; do
 	iostat_log_name="${hadoop_benchmark}_object${j}_${hadoop_file_size}_${job_id}"
 	echo "[iostat log]: ${iostat_log_name}"
-	#ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42 '  > /home/cloudsys/iostat_log/${iostat_log_name} &
-	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42 > ~/iostat.log'
+	ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42 '  > /home/cloudsys/iostat_log/${iostat_log_name} &
+	#ssh object$j 'iostat -c -d -x -t -m /dev/sda 5 42 > ~/iostat.log'
 done
 
 echo "----[sleeping for 400 sec]----"
