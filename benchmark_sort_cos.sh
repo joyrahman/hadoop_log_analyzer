@@ -26,7 +26,7 @@ iostat_log_dir="/home/cloudsys/iostat_log"
 
 
 echo "----[running cos]----"
-ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_128K.xml'
+ssh keystone  'cd ~/cosbench && sh cli.sh submit conf/workload-webhosting_16worker.xml'
 sleep 70
 
 
